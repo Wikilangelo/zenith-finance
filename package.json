@@ -2,7 +2,12 @@
   "name": "zenith-finance",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "npm@10",
   "description": "AI-native financial operating system focused on calm intelligence and privacy-first shared finance.",
+  "engines": {
+    "node": ">=22",
+    "npm": ">=10"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
