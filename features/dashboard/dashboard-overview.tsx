@@ -11,7 +11,11 @@ import {
   Utensils,
 } from "lucide-react";
 
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { DesignSystemShowcase } from "@/features/design-system/design-system-showcase";
 
 const categories = [
   { label: "Casa", amount: "€850", icon: Home, progress: "74%" },
@@ -42,7 +46,7 @@ export function DashboardOverview() {
       </section>
 
       <section className="grid gap-5 lg:grid-cols-[1fr_280px]">
-        <motion.article
+        <motion.div
           className="rounded-card border border-border bg-card p-6 shadow-card sm:p-8"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -60,9 +64,7 @@ export function DashboardOverview() {
                 Sotto il budget previsto di 200€
               </p>
             </div>
-            <span className="rounded-full bg-sage-50 px-3 py-2 text-sm font-extrabold text-sage-700">
-              -12%
-            </span>
+            <Badge variant="sage">-12%</Badge>
           </div>
           <div className="mt-8 flex h-24 items-end gap-3">
             {[42, 56, 50, 64, 47, 34, 27].map((height, index) => (
@@ -73,21 +75,23 @@ export function DashboardOverview() {
               />
             ))}
           </div>
-        </motion.article>
+        </motion.div>
 
-        <article className="rounded-card border border-border bg-card p-6 shadow-card">
-          <p className="text-sm font-extrabold">Bilancio di coppia</p>
-          <p className="mt-6 text-sm font-medium text-muted-foreground">
-            Marco ha anticipato
-          </p>
-          <p className="mt-1 text-2xl font-extrabold text-primary">€184,00</p>
-          <div className="mt-8 space-y-3">
-            <Button className="w-full">Regola spese</Button>
-            <Button className="w-full" variant="secondary">
-              Invia reminder
-            </Button>
-          </div>
-        </article>
+        <Card>
+          <CardContent className="p-6">
+            <p className="text-sm font-extrabold">Bilancio di coppia</p>
+            <p className="mt-6 text-sm font-medium text-muted-foreground">
+              Marco ha anticipato
+            </p>
+            <p className="mt-1 text-2xl font-extrabold text-primary">€184,00</p>
+            <div className="mt-8 space-y-3">
+              <Button className="w-full">Regola spese</Button>
+              <Button className="w-full" variant="secondary">
+                Invia reminder
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
       </section>
 
       <section className="space-y-4">
@@ -110,12 +114,10 @@ export function DashboardOverview() {
               <p className="mt-2 text-lg font-extrabold text-primary">
                 {category.amount}
               </p>
-              <div className="mt-3 h-1.5 rounded-full bg-muted">
-                <div
-                  className="h-full rounded-full bg-secondary"
-                  style={{ width: category.progress }}
-                />
-              </div>
+              <Progress
+                className="mt-3 h-1.5"
+                value={Number.parseInt(category.progress, 10)}
+              />
             </article>
           ))}
         </div>
@@ -124,10 +126,10 @@ export function DashboardOverview() {
       <section className="space-y-4">
         <div className="flex items-center justify-between gap-4">
           <h2 className="text-2xl font-extrabold">Attività recente</h2>
-          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs font-bold text-primary">
+          <Badge variant="outline">
             <Sparkles className="size-3.5" />
             AI categorizzato
-          </span>
+          </Badge>
         </div>
         <div className="overflow-hidden rounded-card border border-border bg-card shadow-card">
           {transactions.map((transaction) => (
@@ -148,6 +150,8 @@ export function DashboardOverview() {
           ))}
         </div>
       </section>
+
+      <DesignSystemShowcase />
     </div>
   );
 }

@@ -10,7 +10,10 @@ describe("HomePage", () => {
     expect(
       screen.getByRole("heading", { name: /marco/i, level: 1 }),
     ).toBeInTheDocument();
-    expect(screen.getByText(/spesa mensile/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/spesa mensile/i)).toHaveLength(2);
+    expect(
+      screen.getByText(/calm financial interface primitives/i),
+    ).toBeInTheDocument();
     expect(
       screen.getByRole("navigation", { name: "Primary" }),
     ).toBeInTheDocument();
