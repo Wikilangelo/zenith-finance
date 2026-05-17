@@ -70,6 +70,21 @@ The codebase is organized around feature ownership and shared primitives:
 - `validators` contains server-side Zod schemas.
 - `tests` and `e2e` contain unit/component and browser smoke tests.
 
+## Design System
+
+The design system lives in `components/ui`, `components/feedback`, and
+feature-level examples under `features/design-system`.
+
+Current foundations include:
+
+- typography, spacing, color, radius, shadow, and motion tokens in Tailwind/CSS
+- Card, Button, Input, Badge, Progress, and Skeleton primitives
+- Empty, Error, AI thinking, and AI insight feedback states
+- mobile-first mock examples on the dashboard surface
+
+All design-system work is mock-only. It does not connect to authentication,
+databases, AI providers, OCR, or banking services.
+
 ## Deployment
 
 CI runs on GitHub Actions and verifies install, lint, typecheck, unit tests,
