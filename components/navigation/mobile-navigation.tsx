@@ -1,11 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { mobileNavItems } from "@/components/navigation/nav-items";
 import { cn } from "@/lib/utils";
 
 export function MobileNavigation() {
+  const pathname = usePathname() ?? "/";
+
   return (
     <motion.nav
       animate={{ y: 0, opacity: 1 }}
@@ -15,21 +19,28 @@ export function MobileNavigation() {
       transition={{ duration: 0.25, ease: "easeOut" }}
     >
       <div className="mx-auto grid max-w-md grid-cols-5 gap-1">
-        {mobileNavItems.map((item) => (
-          <button
-            className={cn(
-              "zenith-focus flex min-h-14 flex-col items-center justify-center gap-1 rounded-input text-[11px] font-bold text-muted-foreground transition-colors",
-              item.active && "bg-muted text-primary",
-              item.label === "Add" &&
-                "hover:bg-primary/92 relative mx-auto -mt-7 size-14 rounded-full bg-primary text-primary-foreground shadow-soft",
-            )}
-            key={item.label}
-            type="button"
-          >
-            <item.icon className="size-5" />
-            <span>{item.label}</span>
-          </button>
-        ))}
+        {mobileNavItems.map((item) => {
+          const isActive =
+            item.href === "/"
+              ? pathname === "/"
+              : pathname.startsWith(item.href);
+
+          return (
+            <Link
+              className={cn(
+                "zenith-focus flex min-h-14 flex-col items-center justify-center gap-1 rounded-input text-[11px] font-bold text-muted-foreground transition-colors",
+                isActive && "bg-muted text-primary",
+                item.label === "Add" &&
+                  "hover:bg-primary/92 relative mx-auto -mt-7 size-14 rounded-full bg-primary text-primary-foreground shadow-soft",
+              )}
+              href={item.href}
+              key={item.label}
+            >
+              <item.icon className="size-5" />
+              <span>{item.label}</span>
+            </Link>
+          );
+        })}
       </div>
     </motion.nav>
   );

@@ -2,25 +2,25 @@ import {
   Activity,
   Bot,
   ChartSpline,
+  CircleUserRound,
   Home,
   PlusCircle,
   Settings,
-  UserCircle,
 } from "lucide-react";
 
 export const desktopNavItems = [
-  { label: "Dashboard", icon: Home, active: true },
-  { label: "Activity", icon: Activity, active: false },
-  { label: "Add Expense", icon: PlusCircle, active: false },
-  { label: "AI Insights", icon: Bot, active: false },
-  { label: "Goals", icon: ChartSpline, active: false },
-  { label: "Settings", icon: Settings, active: false },
+  { label: "Dashboard", href: "/", icon: Home },
+  { label: "Activity", href: "/activity", icon: Activity },
+  { label: "Add Expense", href: "/activity", icon: PlusCircle },
+  { label: "AI Insights", href: "/insights", icon: Bot },
+  { label: "Goals", href: "/goals", icon: ChartSpline },
+  { label: "Settings", href: "/profile", icon: Settings },
 ];
 
 export const mobileNavItems = [
-  { label: "Home", icon: Home, active: true },
-  { label: "Feed", icon: ChartSpline, active: false },
-  { label: "Add", icon: PlusCircle, active: false },
-  { label: "AI", icon: Bot, active: false },
-  { label: "Profile", icon: UserCircle, active: false },
+  { label: "Home", href: "/", icon: Home },
+  { label: "Feed", href: "/feed", icon: ChartSpline },
+  { label: "Add", href: "/activity", icon: PlusCircle },
+  { label: "AI", href: "/insights", icon: Bot },
+  { label: "Profile", href: "/profile", icon: CircleUserRound },
 ];

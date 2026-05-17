@@ -1,7 +1,14 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 import { desktopNavItems } from "@/components/navigation/nav-items";
 import { cn } from "@/lib/utils";
 
 export function DesktopSidebar() {
+  const pathname = usePathname() ?? "/";
+
   return (
     <aside className="fixed inset-y-0 left-0 hidden w-64 border-r border-border/80 bg-card lg:flex lg:flex-col">
       <div className="px-7 py-8">
@@ -12,20 +19,27 @@ export function DesktopSidebar() {
       </div>
 
       <nav className="flex-1 space-y-2 px-4" aria-label="Primary">
-        {desktopNavItems.map((item) => (
-          <button
-            className={cn(
-              "zenith-focus flex h-12 w-full items-center gap-3 rounded-input px-4 text-left text-sm font-semibold text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
-              item.active &&
-                "bg-muted text-primary shadow-[inset_3px_0_0_hsl(var(--primary))]",
-            )}
-            key={item.label}
-            type="button"
-          >
-            <item.icon className="size-5" />
-            <span>{item.label}</span>
-          </button>
-        ))}
+        {desktopNavItems.map((item) => {
+          const isActive =
+            item.href === "/"
+              ? pathname === "/"
+              : pathname.startsWith(item.href);
+
+          return (
+            <Link
+              className={cn(
+                "zenith-focus flex h-12 w-full items-center gap-3 rounded-input px-4 text-left text-sm font-semibold text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
+                isActive &&
+                  "bg-muted text-primary shadow-[inset_3px_0_0_hsl(var(--primary))]",
+              )}
+              href={item.href}
+              key={item.label}
+            >
+              <item.icon className="size-5" />
+              <span>{item.label}</span>
+            </Link>
+          );
+        })}
       </nav>
 
       <div className="p-5">
