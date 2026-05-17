@@ -3,9 +3,11 @@ import { expect, test } from "@playwright/test";
 test("renders the Zenith shell on desktop", async ({ page }) => {
   await page.goto("/");
 
-  await expect(page.getByRole("heading", { name: "Marco" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Buongiorno Marco" }),
+  ).toBeVisible();
   await expect(page.getByRole("navigation", { name: "Primary" })).toBeVisible();
-  await expect(page.getByText("Categorie principali")).toBeVisible();
+  await expect(page.getByText("Timeline recente")).toBeVisible();
 });
 
 test("renders mobile navigation", async ({ page }) => {
@@ -15,5 +17,5 @@ test("renders mobile navigation", async ({ page }) => {
   await expect(
     page.getByRole("navigation", { name: "Mobile primary" }),
   ).toBeVisible();
-  await expect(page.getByRole("button", { name: "Add" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Add" })).toBeVisible();
 });
